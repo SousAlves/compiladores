@@ -43,6 +43,7 @@ class Main {
 						case DecafLexer.HEXADECIMAL:   
                             				type= " INTLITERAL";
                             				break;
+<<<<<<< HEAD
 						case DecafLexer.FALSE: 
 							type= " BOOLEANLITERAL";
 							break;
@@ -56,6 +57,8 @@ class Main {
 							break;
 
 
+=======
+>>>>>>> 8bafbd8b1237f6d9a6982f3c74ad5de4d89b17f1
 		        			}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
