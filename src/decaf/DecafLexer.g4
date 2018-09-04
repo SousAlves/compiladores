@@ -14,13 +14,10 @@ tokens
   TK_class
 }
 
-LCURLY : '{';
-RCURLY : '}';
-
-
 IF : 'if';
 ELSE : 'else';
 BOOLEAN : 'boolean';
+BOOLEANLITERAL : 'true' | 'false';
 BREAK : 'break';
 CALLOUT : 'callout';
 CLASS : 'class';
@@ -32,48 +29,51 @@ RETURN : 'return';
 TRUE : 'true';
 VOID : 'void';
 
+LCURLY : '{';
+RCURLY : '}';
 
-ID  :
-  ('a'..'z' | 'A'..'Z')+;
+LPAR : '(';
+RPAR : ')';
+HIFEN : '-';
+VIRG : ',';
+MAIS : '+';
+MENOS : '-';
+MULT : '*';
+DIV : '/';
+PERC : '%';
+PVIRG : ';';
+LCOLCH : '[';
+RCOLCH : ']';
+OR : '||';
+IGUAL : '==';
+PERTENCE : '=';
+DIF : '!=';
+AND : '&&';
+MENORQ : '<';
+MAIORQ : '>';
+MAIORIG : '>=';
+MENORIG :'<=';
 
-WS_ : (' ' | '\n' ) -> skip;
+ID  :  (ALFABETO | '_')(ALFABETO | NUMERO | '_')*;
+
+WS_ : (' ' | '\n' | '\t') -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\'' (ESC| ALFANUMERICO| IDCHAR) '\'';
-STRING : '"' (IDSTR | ALFANUMERICO)+ '"';
+CHAR : '\'' (ESC| ALFABETO | NUMERO | IDCHAR) '\'';
+STRING : '"' (IDCSTR | ALFABETO | NUMERO)+ '"';
 HEXADECIMAL : '0x'(NUMERO | ALFAHEX)+;
+NUM : (NUMERO)+;
 
 
-OP : (OPERADORES);
+fragment ALFABETO  : ('a'..'z' | 'A'..'Z');
 
+fragment NUMERO : ('0'..'9');
 
-fragment
-ESC :  '\\' ('n'| '"'| 't' | '\\');
+fragment ALFAHEX : ('a'..'f' | 'A'..'F');
 
+fragment ESC :  '\\' ('n'| '"'| 't' | '\\');
 
-fragment
-OPERADORES : 
-	('+' | '-' | '*' | '<' | '<=' | '!=' | '&&');
+fragment IDCSTR : (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\'' | '\t' | '"' | '\\' );
 
-fragment
-IDSTR :
-    (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' |
-     ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' |
-     '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\''| '\t' | '"' | '\\' );
-
-fragment
-IDCHAR:
-    (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' |
-     ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' |
-     '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~');
- 
-
-fragment
-ALFANUMERICO  : ('a'..'z' | 'A'..'Z' | '0'..'9');
-
-fragment
-ALFAHEX : ('a'..'f' | 'A'..'F');
-
-fragment
-NUMERO : ('0'..'9');
+fragment IDCHAR: (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~');
