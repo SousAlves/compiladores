@@ -13,67 +13,64 @@ tokens
 {
   TK_class
 }
+CALLOUT : 'callout';
+PROGRAM: 'Program';
+BREAK : 'break';
+CLASS : 'class';
+CONTINUE : 'continue';
+RETURN : 'return';
+VOID : 'void';
 
 IF : 'if';
 ELSE : 'else';
-BOOLEAN : 'boolean';
-BOOLEANLITERAL : 'true' | 'false';
-BREAK : 'break';
-CALLOUT : 'callout';
-CLASS : 'class';
-CONTINUE : 'continue';
-FALSE : 'false';
 FOR : 'for';
 INT : 'int';
-RETURN : 'return';
-TRUE : 'true';
-VOID : 'void';
+BOOLEAN : 'boolean';
+BOOLEANLITERAL : 'true' | 'false';
 
 LCURLY : '{';
 RCURLY : '}';
-
-LPAR : '(';
-RPAR : ')';
-HIFEN : '-';
-VIRG : ',';
-MAIS : '+';
-MENOS : '-';
-MULT : '*';
-DIV : '/';
-PERC : '%';
-PVIRG : ';';
 LCOLCH : '[';
 RCOLCH : ']';
-OR : '||';
-IGUAL : '==';
-PERTENCE : '=';
-DIF : '!=';
-AND : '&&';
-MENORQ : '<';
-MAIORQ : '>';
-MAIORIG : '>=';
-MENORIG :'<=';
+LPAR : '(';
+RPAR : ')';
 
-ID  :  (ALFABETO | '_')(ALFABETO | NUMERO | '_')*;
+VIRG : ',';
+PVIRG : ';';
+
+MULT : '*';
+
+DIV : '/';
+MENOS : '-';
+MAIS : '+';
+PERC : '%';
+EXCLAMACAO:'!';
+AND : '&&';
+OR : '||';
+
+IGUAL : '==';
+DIF : '!=';
+MENORQ : '<';
+MAIORQ : '>';	
+MAIORIG : '>=';
+MENORIG : '<=';
+MAISIG:'+=';
+MENOSIG:'-=';
+PERTENCE : '=';
 
 WS_ : (' ' | '\n' | '\t') -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
+ID  :  (ALFABETO | '_')(ALFABETO | NUMERO | '_')*;
 CHAR : '\'' (ESC| ALFABETO | NUMERO | IDCHAR) '\'';
 STRING : '"' (IDCSTR | ALFABETO | NUMERO)+ '"';
-HEXADECIMAL : '0x'(NUMERO | ALFAHEX)+;
 NUM : (NUMERO)+;
-
+HEXADECIMAL : '0x' (NUMERO | ALFAHEX);
 
 fragment ALFABETO  : ('a'..'z' | 'A'..'Z');
-
 fragment NUMERO : ('0'..'9');
-
 fragment ALFAHEX : ('a'..'f' | 'A'..'F');
-
 fragment ESC :  '\\' ('n'| '"'| 't' | '\\');
-
 fragment IDCSTR : (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | '\\\'' | '\t' | '"' | '\\' );
-
 fragment IDCHAR: (' '| '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ','| '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@'| ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~');
