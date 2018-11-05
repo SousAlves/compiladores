@@ -10,15 +10,19 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY EOF;
+program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: type id (VIRG type id)* PVIRG;
+decl: type ID;
 
-method_decl: (type|VOID) ID LPAR (type ID (VIRG type ID)*)? RPAR block;
+field_decl: decl(LCOLCH int_literal RCOLCH)? (VIRG decl(LCOLCH int_literal RCOLCH)?)* PVIRG | type ID (VIRG)* PVIRG;
 
-block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: (type ID)* PVIRG;
+method_type: (type|VOID) ID;
+method_decl: method_type LPAR (decl (VIRG decl)*)* RPAR block ;
+
+block: LCURLY (var_decl)* (statement)* RCURLY;
+
+var_decl: (decl)* PVIRG;
 
 type: INT|BOOLEAN;
 
@@ -63,7 +67,6 @@ literal : int_literal | char_literal | bool_literal;
 
 int_literal : NUM | HEXADECIMAL;
 
-id : ID | ID LCOLCH? int_literal+ RCOLCH?;
 
 string_literal : STRING;
 
