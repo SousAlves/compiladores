@@ -31,7 +31,7 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     }
 
     @Override
-    public void enterMethod_type(DecafParser.Method_typeContext ctx) {
+    public void enterMethod_decl(DecafParser.Method_declContext ctx) {
         String name = ctx.ID().getText();
         //int typeTokenType = ctx.type().start.getType();
         //DecafSymbol.Type type = this.getType(typeTokenType);
@@ -46,7 +46,7 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     }
 
     @Override
-    public void exitMethod_type(DecafParser.Method_typeContext ctx) {
+    public void exitMethod_decl(DecafParser.Method_declContext ctx) {
         popScope();
     }
 
@@ -63,43 +63,20 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     }
 
     @Override
-    public void enterDecl(DecafParser.DeclContext ctx) {
-        defineVar(ctx.type(), ctx.ID().getSymbol());
+    public void enterField_decl(DecafParser.Field_declContext ctx) {
+        //defineVar(ctx.type(), ctx.ID().getSymbol());
     }
 
     @Override
-    public void exitDecl(DecafParser.DeclContext ctx) {
-        String name = ctx.ID().getSymbol().getText();
+    public void exitField_decl(DecafParser.Field_declContext ctx) {
+        /*String name = ctx.ID().getSymbol().getText();
         Symbol var = currentScope.resolve(name);
         if ( var==null ) {
             this.error(ctx.ID().getSymbol(), "no such variable: "+name);
         }
         if ( var instanceof FunctionSymbol ) {
             this.error(ctx.ID().getSymbol(), name+" is not a variable");
-        }
-    }
-
-   @Override
-    public void enterField_decl(DecafParser.Field_declContext ctx) {
-	for (int i = 0; i < ctx.ID().size(); i++){
-		defineVar(ctx.type(), ctx.ID().get(i).getSymbol());
-	}        
-    }
-
-    @Override
-    public void exitField_decl(DecafParser.Field_declContext ctx) {
-	for (int i = 0; i < ctx.ID().size(); i++){
-
-		String name = ctx.ID().get(i).getSymbol().getText();
-		Symbol var = currentScope.resolve(name);
-		if ( var==null ) {
-		    this.error(ctx.ID().get(i).getSymbol(), "no such variable: "+name);
-		}
-		if ( var instanceof FunctionSymbol ) {
-		    this.error(ctx.ID().get(i).getSymbol(), name+" is not a variable");
-		}
-	}
-        
+        }*/
     }
 
     void defineVar(DecafParser.TypeContext typeCtx, Token nameToken) {
