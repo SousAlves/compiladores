@@ -20,7 +20,7 @@ method_decl: (type | VOID) ID LPAR (tipo_method(VIRG tipo_method)*)? RPAR block;
 
 block: LCURLY (var_decl)* (statement)* RCURLY;
 
-var_decl: tipo_method(VIRG ID)* PVIRG;
+var_decl: type ID (VIRG ID)* PVIRG;
 
 type: INT|BOOLEAN;
 
